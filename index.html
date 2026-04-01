@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Midnight Playlist</title>
+    <style>
+        /* [기본 설정] 다크 모드 테마 */
+        :root {
+            --bg-color: #0b0e14;
+            --card-bg: #1a1d24;
+            --accent-color: #1db954; /* 스포티파이 그린 */
+            --text-color: #ffffff;
+            --sub-text: #a7a7a7;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Pretendard', sans-serif;
+            margin: 0; padding: 60px 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        #main-wrapper { width: 100%; max-width: 800px; }
+
+        header { text-align: center; margin-bottom: 50px; }
+        header h1 { font-size: 3rem; letter-spacing: 2px; margin: 0; }
+
+        .playlist-container { display: flex; flex-direction: column; gap: 20px; }
+
+        /* 장르 카드 레이아웃 */
+        .genre-section {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #2a2f3a;
+            transition: all 0.3s ease;
+        }
+
+        .trigger { display: none; }
+
+        /* 카드 헤더 (대문) */
+        .genre-header {
+            display: flex; align-items: center; padding: 20px;
+            cursor: pointer;
+        }
+        .genre-header:hover { background-color: #252a33; }
+
+        .genre-header img {
+            width: 80px; height: 80px; border-radius: 10px;
+            object-fit: cover; margin-right: 20px;
+        }
+
+        .genre-info h2 { margin: 0; font-size: 1.5rem; }
+        .genre-info p { margin: 5px 0 0 0; color: var(--accent-color); font-size: 0.9rem; }
+
+        /* 노래 목록 (클릭 전엔 숨김) */
+        .song-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: #14171c;
+        }
+
+        /* 클릭 시 열리는 효과 */
+        .trigger:checked + .genre-header + .song-list {
+            max-height: 500px;
+            padding: 10px 20px 20px 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* 노래 아이템 스타일 */
+        .song-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 10px; border-bottom: 1px solid #222;
+            text-decoration: none; color: var(--text-color);
+        }
+        .song-item:hover { background-color: #1db95422; border-radius: 8px; }
+        .song-item:last-child { border-bottom: none; }
+
+        .song-name { font-weight: bold; font-size: 1rem; }
+        .song-artist { color: var(--sub-text); font-size: 0.85rem; }
+        .play-icon { color: var(--accent-color); font-size: 1.2rem; }
+
+        footer { margin-top: 50px; color: var(--sub-text); font-size: 0.8rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="main-wrapper">
+        <header>
+            <h1>PLAYLIST</h1>
+            <p style="color: var(--sub-text); margin-top: 10px;">카드를 클릭해 보세요!</p>
+        </header>
+
+        <div class="playlist-container">
+            
+            <div class="genre-section">
+                <input type="checkbox" id="jpop-trigger" class="trigger">
+                <label for="jpop-trigger" class="genre-header">
+                    <img src="https://i.namu.wiki/i/T39Zg65glmprySXNSgMiyBnTxkTkFV-__R6Y7JTorqBcutmHY3QxqG2oUUTCm3MTH8VtfnaxuXKKhm5z2A9BZg.webp" alt="J-POP">
+                    <div class="genre-info">
+                        <h2>J-POP</h2>
+                        <p>#プロポーズ #さよーならまたいつか！#灰色と青</p>
+                    </div>
+                </label>
+                <div class="song-list">
+                    <a href="https://www.youtube.com/watch?v=VDdLF1YubI0&list=RDVDdLF1YubI0&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">1. プロポ즈 - natori</div><div class="song-artist">natori</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=-wb2PAx6aEs&list=RD-wb2PAx6aEs&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">2. さよーならまたいつか！ - Kenshi Yonezu</div><div class="song-artist">Kenshi Yonezu</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=gJX2iy6nhHc&list=RDgJX2iy6nhHc&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">3. 灰色と青 - Kenshi Yonezu</div><div class="song-artist">Kenshi Yonezu</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="genre-section">
+                <input type="checkbox" id="rnb-trigger" class="trigger">
+                <label for="rnb-trigger" class="genre-header">
+                    <img src="https://image.bugsm.co.kr/album/images/500/40907/4090703.jpg" alt="R&B">
+                    <div class="genre-info">
+                        <h2>R&B</h2>
+                        <p>#Romeo n Juliet #산책 #떠나</p>
+                    </div>
+                </label>
+                <div class="song-list">
+                    <a href="https://www.youtube.com/watch?v=rHLGjbz-yls&list=RDrHLGjbz-yls&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">1. Romeo n Juliet - George(feat.유라)</div><div class="song-artist">George(feat.유라)</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=t9aZFgD0mic&list=RDt9aZFgD0mic&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">2. 산책 - 백예린</div><div class="song-artist">백예린</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=19mgfGXkkSc&list=RD19mgfGXkkSc&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">3. 떠나 - THAMA, Jayci yucca</div><div class="song-artist">THAMA, Jayci yucca</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="genre-section">
+                <input type="checkbox" id="indie-trigger" class="trigger">
+                <label for="indie-trigger" class="genre-header">
+                    <img src="https://image.bugsm.co.kr/album/images/500/200668/20066833.jpg" alt="Indie">
+                    <div class="genre-info">
+                        <h2>Indie</h2>
+                        <p>#0+0 #seasons #위잉위잉</p>
+                    </div>
+                </label>
+                <div class="song-list">
+                    <a href="https://www.youtube.com/watch?v=_Ngk-DCHfD0&list=RD_Ngk-DCHfD0&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">1. 0+0 - HANRORO</div><div class="song-artist">HANRORO</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=CnVVjLOGVoY&list=RDCnVVjLOGVoY&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">2. seasons - wave to earth</div><div class="song-artist">wave to earth</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=IUoTjkS242c&list=RDIUoTjkS242c&start_radio=1" target="_blank" class="song-item">
+                        <div><div class="song-name">3. 위잉위잉 - 혁오</div><div class="song-artist">혁오</div></div>
+                        <span class="play-icon">▶</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
