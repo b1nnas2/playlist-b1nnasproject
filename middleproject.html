@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>플러팅 유형 테스트</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url("https://i.postimg.cc/MGXBn4yc/Chat-GPT-Image-2026nyeon-4wol-17il-ohu-09-05-17.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #screen {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+
+            padding: 40px;
+            border: 25px;
+
+            width: 500px;
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(255,105,135,0.3);
+        }
+
+        h1 {
+            color: #ff5c8a;
+            font-size: 26px;
+            margin-bottom: 25px;
+
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        p {
+            font-size: 20px;
+            color: #ff4d7d;
+            font-weight: bold;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+
+            margin: 10px 0;
+            padding: 12px;
+
+            border: none;
+            border-radius: 15px;
+
+            background: linear-gradient(135deg, #ff9bb3, #ff5c8a);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.2s;
+
+            box-shadow: 0 5px 15px rgba(255,105,135,0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,105,135,0.5);
+        }
+
+        button:first-child {
+            font-size: 18px;
+            padding: 15px;
+        }
+        
+    </style>
+</head>
+<body id="body">
+
+    <div id="screen">
+        <button onclick="start()">테스트 시작</button>
+    </div>
+
+    <script>
+        let step=0;
+
+        let A=0; //직진
+        let B=0; //행동
+        let C=0; //장난
+        let D=0; //멘트
+
+        function start() {
+            step = 1;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if(step==1) {
+                document.getElementById("screen").innerHTML = `
+                    <h1>마음에 드는 사람이 앞에 있다면?</h1>
+                    <button onclick="choose('A')">상대의 눈을 마주보며 윙크를 날린다</button>
+                    <button onclick="choose('B')">상대에게 다가가 손하트를 날린다</button>
+                    <button onclick="choose('C')">물컵을 상대에게 쏟으며 꽃에 물 준 거라고 말한다</button>
+                    <button onclick="choose('D')">너한테서 타는 냄새 안 나? 지금 내 마음이 불타고 있잖아 라고 말한다</button>
+                `;
+            }
+
+            else if(step==2) {
+                document.getElementById("screen").innerHTML = `
+                    <h1>연락 스타일은?</h1>
+                    <button onclick="choose('A')">연락 따윈 남기지 않고 당장 만나러 간다</button>
+                    <button onclick="choose('B')">시도 때도 없이 연락한다</button>
+                    <button onclick="choose('C')">연락을 남겨 놓고 상대방이 읽기 전에 삭제한다</button>
+                    <button onclick="choose('D')">연락을 하다가 갑자기 상황극을 한다</button>
+                `;
+            }
+
+            else if(step==3) {
+                document.getElementById("screen").innerHTML = `
+                    <h1>데이트 스타일은?</h1>
+                    <button onclick="choose('A')">하루 종일 같이 있고 싶으니까 동거를 한다</button>
+                    <button onclick="choose('B')">데이트 하기 전에 왕만한 꽃을 사들고 간다</button>
+                    <button onclick="choose('C')">상대방의 모든 행동에 효과음을 넣어 준다 스껄!</button>
+                    <button onclick="choose('D')">데이트 하는 내내 플러팅 멘트를 날린다</button>
+                `;
+            }
+
+            else {
+                showResult();
+            }
+        }
+
+        function choose(type) {
+            if(type=='A') A++;
+            if(type=='B') B++;
+            if(type=='C') C++;
+            if(type=='D') D++;
+
+            step++;
+            showQuestion();
+        }
+
+        function showResult() {
+            let result="";
+
+            if(A >= B && A >= C && A >= D) {
+                result="직진 플러터<br>브레이크가 고장났네요!";
+            }
+            
+            else if(B >= A && B >= C && B >= D) {
+                result="행동 플러터<br>그만 들이대세요!";
+            }
+
+             else if(C >= A && C >= B && C >= D) {
+                result="장난 플러터<br>그러다 신고 당해요!";
+            }
+
+            else {
+                result="멘트 플러터<br>토 나오겠어요!";
+            }
+
+            document.getElementById("screen").innerHTML = `
+                    <h1>결과</h1>
+                    <p>${result}</p>
+                    <button onclick="location.reload()">다시하기</button>
+                `;
+
+        }
+
+    </script>
+   
+</body>
+</html>
